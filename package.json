@@ -1,0 +1,19 @@
+{
+  "name": "jack_tidbury_web_api",
+  "version": "1.0.0",
+  "description": "Basic Web Api with multuple endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/MrTidbury/WebApi.git"
+  },
+  "author": "Jack Tidbury",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/MrTidbury/WebApi/issues"
+  },
+  "homepage": "https://gitlab.com/MrTidbury/WebApi#README"
+}
