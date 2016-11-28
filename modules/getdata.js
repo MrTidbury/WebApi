@@ -34,3 +34,6 @@ exports.recipeSearch = function recipeSearch(req, res, next) {
 	})
 
 }
+exports.test = function test(req, res) {
+	res.send("Api is online")
+};

@@ -16,3 +16,4 @@ server.get('/', getdata.test)
 const port = process.env.PORT || 8080
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
+exports.closeServer = function(){server.close();}
