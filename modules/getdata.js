@@ -2,22 +2,27 @@
 
 const request = require('request')
 const apiKey = require('../secrets').apiKey
+const SuccessCode = 200
+const ApiReturnLimit = 20
+const FailureCode = 501
 
-exports.recipeSearch = function recipeSearch(req, res, next) {
-	console.log("fucntion called")
-  const q = req.query.q
+exports.recipeSearch = function recipeSearch(req, res) {
+	console.log('fucntion called')
+	const q = req.query.q
 
-	var options = {
-  url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?limitLicense=false&number=100&offset=0&query='+q,
-  headers: {
-    'X-Mashape-Key': apiKey
-  }
-};
- request.get(options, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
+	const options = {
+		url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?limitLicense=false&number=100&offset=0&query='+q,
+		headers: {
+			'X-Mashape-Key': apiKey
+		}
+	}
+
+	request.get(options, function(error, response, body) {
+		if (!error && response.statusCode === SuccessCode) {
 			const recipes = []
 			const results = JSON.parse(body).results
-			for (let i = 0; i < 20; i++) {
+
+			for (let i = 0; i < ApiReturnLimit; i++) {
 				const recipe = {
 					id: results[i].id,
 					title: results[i].title,
@@ -27,13 +32,13 @@ exports.recipeSearch = function recipeSearch(req, res, next) {
 
 				recipes.push(recipe)
 			}
-			res.send(200, recipes)
+			res.send(SuccessCode, recipes)
 		} else {
-			res.send(501, {message: 'Problem with SpoonAcular API query.', error: error, statusCode: response.statusCode})
+			res.send(FailureCode, {message: 'Problem with SpoonAcular API query.', error: error, statusCode: response.statusCode})
 		}
 	})
 
 }
 exports.test = function test(req, res) {
-	res.send("Api is online")
-};
+	res.send(SuccessCode, 'Api is online')
+}
