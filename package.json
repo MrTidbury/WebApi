@@ -4,8 +4,7 @@
   "description": "Basic Web Api with multuple endpoints",
   "main": "nodejs index.js",
   "scripts": {
-    "test":"jasmine spec/getdata_spec.js"
-
+    "test":"jasmine" 
   },
   "repository": {
     "type": "git",
