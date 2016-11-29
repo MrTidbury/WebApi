@@ -12,7 +12,7 @@ server.use(restify.authorizationParser())
 
 server.get('/search', getdata.recipeSearch)
 server.get('/', getdata.test)
-
+server.get('/recipe/:id', getdata.detailedRecipe)
 const port = process.env.PORT || internal_port
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
