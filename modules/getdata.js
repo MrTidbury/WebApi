@@ -60,8 +60,7 @@ exports.detailedRecipe = function detailedRecipe(req,res){
 				const ingredient = {
 
 					name: ingredientList[i].name,
-					amount: ingredientList[i].amount,
-					unit: ingredientList[i].unit
+					amount: ingredientList[i].originalString
 
 				}
 
