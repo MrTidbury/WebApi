@@ -1,31 +1,22 @@
 'use strict'
 const url = require('../secrets').dbUrl
-const MongoClient = require('mongodb').MongoClient,
-	f = require('util').format, //eslint-disable-line
-	assert = require('assert')
+const mongoose = require('mongoose')
 
-// Use connect method to connect to the Server
-exports.adduser = function adduser(name, email, passwordHash, favorites){
-	MongoClient.connect(url, function(err, db) {
-		assert.equal(null, err)
-		console.log('Connected correctly to server')
-		insertDocument(db, function() {
-			db.close()
-		})
+mongoose.Promise = global.Promise
+
+mongoose.connect(url)
+const User = mongoose.model('User', {name: String, email: String, passwordHash: String, validation: String, validationCode: String, favorites: Array })
+
+exports.adduser = function adduser(name, email, passwordHash, validationCode, favorites){
+	const newUser = new User({name: name, email: email, passwordHash: passwordHash, validation: 'false', validationCode: validationCode, favorites: favorites})
+
+	//console.log('adding user '+newUser)
+	newUser.save(function(err,UserObj){
+		if(err) {
+			//console.log(err)
+		}		else {
+			//console.log('added User '+UserObj)
+		}
 	})
-
-	const insertDocument = function(db, callback) {
-		db.collection('users').insertOne( {
-			'name': name,
-			'email': email,
-			'favorites': favorites,
-			'passowordHash': passwordHash,
-		}, function(err, result) {
-			assert.equal(err, null)
-			console.log('Inserted a document into the restaurants collection.')
-			callback(result.ops)
-			console.log(result.ops)
-			return result.ops
-		})
-	}
+	return newUser
 }

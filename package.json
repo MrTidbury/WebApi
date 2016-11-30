@@ -24,6 +24,7 @@
     "jasmine-node": "^1.14.5",
     "jsdoc": "^3.4.3",
     "mongodb": "^2.2.12",
+    "mongoose": "^4.7.0",
     "request": "^2.79.0",
     "restify": "^4.3.0"
   }
