@@ -4,3 +4,4 @@ node_modules/
 .eslintrc
 readme.md
 secrets.js
+modules/testdb.js
