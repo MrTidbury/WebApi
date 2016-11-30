@@ -10,13 +10,21 @@ const User = mongoose.model('User', {name: String, email: String, passwordHash: 
 exports.adduser = function adduser(name, email, passwordHash, validationCode, favorites){
 	const newUser = new User({name: name, email: email, passwordHash: passwordHash, validation: 'false', validationCode: validationCode, favorites: favorites})
 
-	//console.log('adding user '+newUser)
-	newUser.save(function(err,UserObj){
+	newUser.save(function(err){
 		if(err) {
-			//console.log(err)
-		}		else {
-			//console.log('added User '+UserObj)
+			console.log(err)
 		}
 	})
 	return newUser
+}
+exports.findUser = function findUser(email, callback){
+	User.findOne({email: email}, function(err, userObj){
+		if(err){
+			return callback(err)
+		} else if (userObj){
+			return callback(null,userObj)
+		} else {
+			return callback()
+		}
+	})
 }
