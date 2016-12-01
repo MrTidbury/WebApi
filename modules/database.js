@@ -17,6 +17,7 @@ exports.adduser = function adduser(name, email, passwordHash, validationCode, fa
 	})
 	return newUser
 }
+
 exports.findUser = function findUser(email, callback){
 	User.findOne({email: email}, function(err, userObj){
 		if(err){
@@ -24,7 +25,16 @@ exports.findUser = function findUser(email, callback){
 		} else if (userObj){
 			return callback(null,userObj)
 		} else {
-			return callback()
+			return callback(null,null)
 		}
 	})
+}
+
+exports.validateuser = function validateuser(email, code){
+	const query = { email: email }
+
+	User.update(query, { validation: 'true' }, { multi: false }, callback)
+	function callback(err, numAffected) {
+		console.log(numAffected)
+	}
 }

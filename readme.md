@@ -13,3 +13,7 @@ Acceps a query as /search?q=query and returns the ID title and Time to cook of t
 ##### /recipe/:id
 
 Accepts an ID as a query in the form of /recipe/id and returns more indepth responce, including ingredients and steps to cook. This is the information that will be stored in the SQL server when the user marks this recipie as a favorite
+
+##### /adduser
+
+POST to this address to add a user to the system. email and password are send via basic auth and the name is sent as a header. The system checks if the user is already in the system using the email; and only adds the user if it has not been found  

@@ -82,6 +82,7 @@ exports.detailedRecipe = function detailedRecipe(req,res){
 		}
 	})
 }
+
 exports.test = function test(req, res) {
 	console.log('Test Function Called')
 	res.send(SuccessCode, 'Api is online')
