@@ -30,11 +30,12 @@ exports.findUser = function findUser(email, callback){
 	})
 }
 
-exports.validateuser = function validateuser(email, code){
+exports.validateuser = function validateuser(email){
 	const query = { email: email }
 
 	User.update(query, { validation: 'true' }, { multi: false }, callback)
-	function callback(err, numAffected) {
+	const callback = function callback(err, numAffected) {
+		console.log(err)
 		console.log(numAffected)
 	}
 }
