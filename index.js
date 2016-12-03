@@ -4,6 +4,7 @@ const restify = require('restify')
 const server = restify.createServer()
 const internal_port = 8080
 const getdata = require('./modules/getdata')
+const database = require('./modules/database')
 const authorisation = require('./modules/authorisation')
 
 server.use(restify.fullResponse())
@@ -17,6 +18,7 @@ server.get('/recipe/:id', getdata.detailedRecipe)
 server.post('/adduser', authorisation.registerUser)
 server.get('/favorites',authorisation.authorise, getdata.test)
 server.get('/validate/:email',authorisation.validate )
+server.del('/delete/',authorisation.authorise, database.removeuser )
 
 const port = process.env.PORT || internal_port
 

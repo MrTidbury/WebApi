@@ -6,12 +6,14 @@ const mailer = require('nodemailer')
 const ErrCode = 500
 const AuthErrCode = 403
 const SuccsessCode = 200
+const emailaddr = require('../secrets').emailaddr
+const emailpsw = require('../secrets').emailpsw
 
 const smtpTransport = mailer.createTransport('SMTP',{
 	service: 'Gmail',
 	auth: {
-		user: 'mrtidbury@gmail.com',
-		pass: 'Email001'
+		user: emailaddr,
+		pass: emailpsw
 	}
 })
 
@@ -80,7 +82,7 @@ exports.authorise = function authorise(req, res, next){
 	})
 }
 
-exports.validate = function authorise(req, res){
+exports.validate = function validate(req, res){
 	const validationCode = req.query.q
 	const email = req.params.email
 

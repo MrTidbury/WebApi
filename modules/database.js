@@ -1,6 +1,8 @@
 'use strict'
 const url = require('../secrets').dbUrl
 const mongoose = require('mongoose')
+const succsessCode =200
+const errCode = 500
 
 mongoose.Promise = global.Promise
 
@@ -38,4 +40,21 @@ exports.validateuser = function validateuser(email){
 		console.log(err)
 		console.log(numAffected)
 	}
+}
+
+exports.removeuser = function removeuser(req, res){
+	const header=req.headers['authorization']||''
+	const token=header.split(/\s+/).pop()||''
+	 const auth=new Buffer(token, 'base64').toString()
+	const parts=auth.split(/:/)
+	const email=parts[0]
+
+	console.log(email)
+	User.remove({email: email}, function(err){
+		if(err){
+			res.send(errCode,err)
+		}		else{
+			res.send(succsessCode,'User '+email+'Succsessfully Removed')
+		}
+	})
 }
