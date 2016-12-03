@@ -34,7 +34,7 @@ exports.validateuser = function validateuser(email){
 	const query = { email: email }
 
 	User.update(query, { validation: 'true' }, { multi: false }, callback)
-	const callback = function callback(err, numAffected) {
+	 function callback(err, numAffected) {  //eslint-disable-line
 		console.log(err)
 		console.log(numAffected)
 	}

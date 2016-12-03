@@ -1,9 +1,11 @@
 'use strict'
-const request = require('request')
 const database = require('./database')
 const passwordHash = require('password-hash')
 const uuidV4 = require('uuid')
 const mailer = require('nodemailer')
+const ErrCode = 500
+const AuthErrCode = 403
+const SuccsessCode = 200
 
 const smtpTransport = mailer.createTransport('SMTP',{
 	service: 'Gmail',
@@ -44,11 +46,11 @@ exports.registerUser = function registerUser(req, res){
 				}
 				smtpTransport.close()
 			})
-			res.send(200,'User Added')
+			res.send(SuccsessCode,'User Added')
 		}		else if (error !== null) {
-			res.send(500,error)
+			res.send(ErrCode,error)
 		}		else{
-			res.send(403,'User Alreaady Exists with the email'+email)
+			res.send(AuthErrCode,'User Alreaady Exists with the email'+email)
 		}
 	})
 }
@@ -63,16 +65,16 @@ exports.authorise = function authorise(req, res, next){
 
 	database.findUser(email, function(error, userFound){
 		if(userFound === null){
-			return	res.send(401,'No User Found with this Email')
+			return	res.send(AuthErrCode,'No User Found with this Email')
 		}		else if (error !== null){
-			return 	res.send(500, error)
+			return 	res.send(ErrCode, error)
 		}		else{
 
 			if(passwordHash.verify(password, userFound.passwordHash) && userFound.validation === 'true'){
 				console.log('validated')
 				return next()
 			}	else{
-				return 	res.send(401, 'Inccorect Password or Unauthorized user')
+				return 	res.send(AuthErrCode, 'Inccorect Password or Unauthorized user')
 			}
 		}
 	})
@@ -84,15 +86,15 @@ exports.validate = function authorise(req, res){
 
 	database.findUser(email, function(error, userFound){
 		if(userFound === null){
-			res.send(403,'No user found with email'+email)
+			res.send(AuthErrCode,'No user found with email'+email)
 		}		else if (error !== null) {
-			res.send(500,error)
+			res.send(ErrCode,error)
 		}		else{
 			if (userFound.validationCode === validationCode) {
 				database.validateuser(email)
-				res.send(200, 'Congratulations'+userFound.name+ 'your account is now validated')
+				res.send(SuccsessCode, 'Congratulations '+userFound.name+ 'your account is now validated')
 			}			else{
-				res.send(403,'incorrect code')
+				res.send(AuthErrCode,'incorrect code')
 			}
 		}
 	})
