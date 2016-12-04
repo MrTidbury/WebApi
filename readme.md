@@ -25,3 +25,6 @@ This is the endpoint that verfies the user in the database, allowing them to acc
 ##### /delete
 
 Using the Delete route, via the Delete method allows the user to remove thier account from the service. This requires the user to pass a valid Authorisation header upon the request
+
+##### /profile
+Returns current information about the user, exluding password
