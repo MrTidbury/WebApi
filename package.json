@@ -17,6 +17,7 @@
   },
   "homepage": "https://gitlab.com/MrTidbury/WebApi#README",
   "dependencies": {
+    "async": "^2.1.4",
     "eslint": "^3.11.1",
     "frisby": "^0.8.5",
     "istanbul": "^0.4.5",

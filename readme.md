@@ -22,9 +22,15 @@ POST to this address to add a user to the system. email and password are send vi
 
 This is the endpoint that verfies the user in the database, allowing them to accsess restricted areas of the site. This is where the user verification ends up
 
-##### /delete
+##### /profile (DEL)
 
 Using the Delete route, via the Delete method allows the user to remove thier account from the service. This requires the user to pass a valid Authorisation header upon the request
 
-##### /profile
+##### /profile (GET)
 Returns current information about the user, exluding password
+
+##### /favorites/:id (PUT)
+When logged in and verified, allows users to store the given ID into the favorites array. Checks before adding to ensure no dulpicates are stores in the array
+
+##### /favorites/:id (DEL)
+When logged in and verified, allows users to remove the given ID from thier favorites array
