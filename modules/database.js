@@ -67,13 +67,28 @@ exports.addFavourite = function addFavourite(req, res){
 	const email=parts[0]
 	const id = req.params.id
 
-	User.findOneAndUpdate({email: email},{$push: {favorites: id}},{safe: true, upsert: true},function(err) {
+	User.findOne({email: email}, function(err, userObj){
 		if(err){
-			res.send(500,err)
-		}		else
-			res.send(200, 'Recipie added to favorites')
-	}
-)
+			return res.send(errCode,err)
+		} else if (userObj){
+			const favorites = userObj.favorites
+
+			if(!favorites.includes(id)){
+				User.findOneAndUpdate({email: email},{$push: {favorites: id}},{safe: true, upsert: true},function(err) {
+					if(err){
+						res.send(errCode,err)
+					}		else
+						res.send(succsessCode, 'Recipie added to favorites')
+				}
+			)
+			}			else{
+				res.send(errCode,'Item is already in the Users favorites')
+			}
+		} else {
+			res.send(errCode,'No User Found')
+		}
+	})
+
 }
 exports.removeFavourite = function addFavourite(req, res){
 	const header=req.headers['authorization']||''
@@ -85,9 +100,9 @@ exports.removeFavourite = function addFavourite(req, res){
 
 	User.findOneAndUpdate({email: email},{$pull: {favorites: id}},{safe: true, upsert: true},function(err) {
 		if(err){
-			res.send(500,err)
+			res.send(errCode,err)
 		}		else
-			res.send(200, 'Recipie removed to favorites')
+			res.send(succsessCode, 'Recipie removed to favorites')
 	}
 )
 }
