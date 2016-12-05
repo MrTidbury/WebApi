@@ -58,3 +58,20 @@ exports.removeuser = function removeuser(req, res){
 		}
 	})
 }
+
+exports.addFavourite = function addFavourite(req, res){
+	const header=req.headers['authorization']||''
+	const token=header.split(/\s+/).pop()||''
+	const auth=new Buffer(token, 'base64').toString()
+	const parts=auth.split(/:/)
+	const email=parts[0]
+	const id = req.params.id
+
+	User.findOneAndUpdate({email: email},{$push: {favorites: id}},{safe: true, upsert: true},function(err) {
+		if(err){
+			res.send(500,err)
+		}		else
+			res.send(200, 'Recipie added to favorites')
+	}
+)
+}

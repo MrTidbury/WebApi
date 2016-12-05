@@ -21,7 +21,7 @@ server.get('/favorites',authorisation.authorise, getdata.test)
 server.get('/validate/:email',authorisation.validate )
 server.del('/delete/',authorisation.authorise, database.removeuser )
 server.get('/profile/',authorisation.authorise, user.profile)
-
+server.put('/favorites/:id',authorisation.authorise, database.addFavourite)
 const port = process.env.PORT || internal_port
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
