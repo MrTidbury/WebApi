@@ -15,13 +15,16 @@ server.use(restify.authorizationParser())
 server.get('/search', getdata.recipeSearch)
 server.get('/', getdata.test)
 server.get('/recipe/:id', getdata.detailedRecipe)
-server.post('/adduser', authorisation.registerUser)
 server.get('/favorites',authorisation.authorise, user.favorites)
 server.get('/validate/:email',authorisation.validate )
-server.del('/profile/',authorisation.authorise, database.removeuser )
 server.get('/profile/',authorisation.authorise, user.profile)
-server.put('/favorites/:id',authorisation.authorise, database.addFavourite)
+
+server.del('/profile/',authorisation.authorise, database.removeuser )
 server.del('/favorites/:id',authorisation.authorise, database.removeFavourite)
+
+server.post('/adduser', authorisation.registerUser)
+server.put('/favorites/:id',authorisation.authorise, database.addFavourite)
+
 const port = process.env.PORT || internal_port
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
