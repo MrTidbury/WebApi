@@ -26,8 +26,3 @@ exports.profile = function profile(req, res) {
 		}
 	})
 }
-
-
-exports.removeFav = function removeFav(req, res){
-	//need to insert logic here
-}
