@@ -1,8 +1,7 @@
 'use strict'
 /**
- * @fileOverview Provides database functions to the rest of the file, such as adding, validating and removing users.
- * @author Jack Tidbury
- * @version 1.0.0
+ * Module to handle database transaction such as adding, removing, validating users in the Mongo Database.
+ * @module database
  */
 const url = require('../secrets').dbUrl
 const mongoose = require('mongoose')
@@ -14,6 +13,15 @@ mongoose.Promise = global.Promise
 mongoose.connect(url)
 const User = mongoose.model('User', {name: String, email: String, passwordHash: String, validation: String, validationCode: String, favorites: Array })
 
+/** Function to handle Adding a user to the Database
+* @alias module:getdata.recipeSearch
+* @param {String} name - Users Name
+* @param {String} email - Users email
+* @param {String} passwordHash - The Hased Password to be stored in the Database
+* @param {String} validationCode - The Generated code (using the UUID module) that will be needed to validate the user
+* @param {Array} favorites - The normally empty array that is passed to the Database that will be populated later
+* @returns {Object} Returns the object of the User that has just been added to the databse
+*/
 exports.adduser = function adduser(name, email, passwordHash, validationCode, favorites){
 	const newUser = new User({name: name, email: email, passwordHash: passwordHash, validation: 'false', validationCode: validationCode, favorites: favorites})
 
@@ -25,6 +33,12 @@ exports.adduser = function adduser(name, email, passwordHash, validationCode, fa
 	return newUser
 }
 
+/** Function to handle Adding a user to the Database
+* @alias module:getdata.recipeSearch
+* @param {String} email - Users email
+* @param {Function} callback - The Callback function to be called when the async function is done
+* @returns {Callback} Returns the callback with either the UserOBj or an error
+*/
 exports.findUser = function findUser(email, callback){
 	User.findOne({email: email}, function(err, userObj){
 		if(err){
@@ -37,6 +51,11 @@ exports.findUser = function findUser(email, callback){
 	})
 }
 
+/** Function to Validate the User
+* @alias module:getdata.validateuser
+* @param {String} email - Users email
+* @returns {null} Does not return anything
+*/
 exports.validateuser = function validateuser(email){
 	const query = { email: email }
 
@@ -47,6 +66,11 @@ exports.validateuser = function validateuser(email){
 	}
 }
 
+/** This Function handles the removall of a user from the database, this fuction is only called when the user has been authorized
+* @alias module:getdata.removeuser
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {Response} Either the error or a succsessCode response is reutned to the user*/
 exports.removeuser = function removeuser(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
@@ -64,6 +88,12 @@ exports.removeuser = function removeuser(req, res){
 	})
 }
 
+/** This Function adds a new ID to the favorites array that is stored in the database, only called when the user has been authorized
+* @alias module:getdata.addFavourite
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @param {String} id - Id to be added. Passed dynamicly in the request
+* @returns {Response} Either the error or a succsessCode response is reutned to the user*/
 exports.addFavourite = function addFavourite(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
@@ -95,6 +125,13 @@ exports.addFavourite = function addFavourite(req, res){
 	})
 
 }
+
+/** This Function adds removes the  ID to the favorites array that is stored in the database, only called when the user has been authorized
+* @alias module:getdata.removeFavourite
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @param {String} id - Id to be added. Passed dynamicly in the request
+* @returns {Response} Either the error or a succsessCode response is reutned to the user*/
 exports.removeFavourite = function addFavourite(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
