@@ -1,4 +1,8 @@
 'use strict'
+/**
+ * Module to handle Authorization of users.
+ * @module authorisation
+ */
 const database = require('./database')
 const passwordHash = require('password-hash')
 const uuidV4 = require('uuid')
@@ -17,7 +21,11 @@ const smtpTransport = mailer.createTransport('SMTP',{
 	}
 })
 
-
+/** This Function the addition of a user to the database, it calls the database.addUser function to handle the datbase transaction. It takes all of the information required from the authorization header, and also the name header that are passed in the request. It the Hashes the password and generates a Validation Code. It also sends an email with the validation link to the users email address
+* @alias module:getdata.registerUser
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {Response} Either the error or a succsessCode response is reutned to the user*/
 exports.registerUser = function registerUser(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
@@ -57,6 +65,14 @@ exports.registerUser = function registerUser(req, res){
 	})
 }
 
+/** This function authorises the user, using the authorisation header and then calls the next function if the authorisation is Succsessfull
+* @alias module:getdata.authorise
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @param {Function} next - This is the next function to be called after the completion of this function
+* @returns {Response} If the response is generated, it means that the user has not been authorised
+* @returns {Function} the next() function is called upon succsesfull authorisation to allow for other functions to be called
+*/
 exports.authorise = function authorise(req, res, next){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
@@ -82,6 +98,12 @@ exports.authorise = function authorise(req, res, next){
 	})
 }
 
+/** This Function handles the validation of the user in the database, calls the database.validateuser function
+* @alias module:getdata.validate
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {Response} Sends either an error or sucsess code back to the user
+*/
 exports.validate = function validate(req, res){
 	const validationCode = req.query.q
 	const email = req.params.email
