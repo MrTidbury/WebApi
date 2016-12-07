@@ -1,4 +1,9 @@
 'use strict'
+/**
+ * @fileOverview Provides database functions to the rest of the file, such as adding, validating and removing users.
+ * @author Jack Tidbury
+ * @version 1.0.0
+ */
 const url = require('../secrets').dbUrl
 const mongoose = require('mongoose')
 const succsessCode =200

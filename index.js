@@ -1,4 +1,9 @@
 'use strict'
+/**
+ * @fileOverview Routing For my Recipe API.
+ * @author Jack Tidbury
+ * @version 1.0.0
+ */
 const restify = require('restify')
 const server = restify.createServer()
 const internal_port = 8080
@@ -28,6 +33,9 @@ server.put('/favorites/:id',authorisation.authorise, database.addFavourite)
 const port = process.env.PORT || internal_port
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
+/** closeServer
+*Closes the NodeJS Server, used in testing
+*/
 exports.closeServer = function(){
 	server.close()
 }

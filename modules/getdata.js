@@ -1,11 +1,20 @@
 'use strict'
-
+/**
+ * Module to request and recive data from the SpoonAcular Api.
+ * @module getdata
+ */
 const request = require('request')
 const apiKey = require('../secrets').apiKey
 const SuccessCode = 200
 const ApiReturnLimit = 20
 const FailureCode = 501
 
+/** This is called when /search is called, it takes the query param that is passed in the request
+* @alias module:getdata.recipeSearch
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @param {String} q - the search string, passed dynamicly in the request
+* @returns {JSON} Top 20 results from the spoonacular Api with uninportant info filtered out */
 exports.recipeSearch = function recipeSearch(req, res) {
 	console.log('Search Function Called')
 	const q = req.query.q
@@ -39,6 +48,13 @@ exports.recipeSearch = function recipeSearch(req, res) {
 	})
 
 }
+
+/** This is called when /recipe is called, it takes the ID string of the recipe as a paramiter that is passed in the request
+* @alias module:getdata.detailedRecipe
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @param {String} id - the ID of the desired recipe, passed dynamicly in the request
+* @returns {JSON} Returns more details of the desired recipe from the spoonacular Api with uninportant info filtered out */
 exports.detailedRecipe = function detailedRecipe(req,res){
 	const id = req.params.id
 
@@ -83,6 +99,10 @@ exports.detailedRecipe = function detailedRecipe(req,res){
 	})
 }
 
+/** Responds to the base request with a 200 response code to ensure the API is online
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {null} 200 response Code */
 exports.test = function test(req, res) {
 	console.log('Test Function Called')
 	res.send(SuccessCode, 'Api is online')
