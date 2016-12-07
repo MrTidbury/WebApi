@@ -14,7 +14,7 @@ mongoose.connect(url)
 const User = mongoose.model('User', {name: String, email: String, passwordHash: String, validation: String, validationCode: String, favorites: Array })
 
 /** Function to handle Adding a user to the Database
-* @alias module:getdata.recipeSearch
+* @alias module:database.adduser
 * @param {String} name - Users Name
 * @param {String} email - Users email
 * @param {String} passwordHash - The Hased Password to be stored in the Database
@@ -34,7 +34,7 @@ exports.adduser = function adduser(name, email, passwordHash, validationCode, fa
 }
 
 /** Function to handle Adding a user to the Database
-* @alias module:getdata.recipeSearch
+* @alias module:database.findUser
 * @param {String} email - Users email
 * @param {Function} callback - The Callback function to be called when the async function is done
 * @returns {Callback} Returns the callback with either the UserOBj or an error
@@ -52,7 +52,7 @@ exports.findUser = function findUser(email, callback){
 }
 
 /** Function to Validate the User
-* @alias module:getdata.validateuser
+* @alias module:database.validateuser
 * @param {String} email - Users email
 * @returns {null} Does not return anything
 */
@@ -67,7 +67,7 @@ exports.validateuser = function validateuser(email){
 }
 
 /** This Function handles the removall of a user from the database, this fuction is only called when the user has been authorized
-* @alias module:getdata.removeuser
+* @alias module:database.removeuser
 * @param {Object} req - The request object
 * @param {Object} res - The response object
 * @returns {Response} Either the error or a succsessCode response is reutned to the user*/
@@ -89,7 +89,7 @@ exports.removeuser = function removeuser(req, res){
 }
 
 /** This Function adds a new ID to the favorites array that is stored in the database, only called when the user has been authorized
-* @alias module:getdata.addFavourite
+* @alias module:database.addFavourite
 * @param {Object} req - The request object
 * @param {Object} res - The response object
 * @param {String} id - Id to be added. Passed dynamicly in the request
@@ -127,7 +127,7 @@ exports.addFavourite = function addFavourite(req, res){
 }
 
 /** This Function adds removes the  ID to the favorites array that is stored in the database, only called when the user has been authorized
-* @alias module:getdata.removeFavourite
+* @alias module:database.removeFavourite
 * @param {Object} req - The request object
 * @param {Object} res - The response object
 * @param {String} id - Id to be added. Passed dynamicly in the request
