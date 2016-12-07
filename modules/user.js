@@ -1,10 +1,20 @@
 'use strict'
+/**
+ * Module to handle the displaying of Users information, including profile and favorites
+ * @module user
+ */
 const database = require('./database')
 const request = require('request')
 const async = require('async')
 const errCode = 500
 const succsesCode = 200
 
+/** This function gets the Users Data from the Database and returns the data that is held on the user
+* @alias module:getdata.profile
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {JSON} Returns the Users Data in JSON form
+*/
 exports.profile = function profile(req, res) {
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
@@ -28,6 +38,12 @@ exports.profile = function profile(req, res) {
 	})
 }
 
+/** This function makes use of the Async module to handle multiple requests; and array of URL's is generated based off of the users favorites and each of these URL's are called at the same time all of the responses are grouped and sent back to the user
+* @alias module:getdata.favorites
+* @param {Object} req - The request object
+* @param {Object} res - The response object
+* @returns {JSON} Returns the Users favorite recipes in JSON form
+*/
 exports.favorites = function profile(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
