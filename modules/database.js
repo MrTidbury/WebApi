@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise
 mongoose.connect(url)
 const User = mongoose.model('User', {name: String, email: String, passwordHash: String, validation: String, validationCode: String, favorites: Array })
 
+exports.User = User
 /** Function to handle Adding a user to the Database
 * @alias module:database.adduser
 * @param {String} name - Users Name
@@ -62,7 +63,7 @@ exports.validateuser = function validateuser(email){
 	User.update(query, { validation: 'true' }, { multi: false }, callback)
 	 function callback(err, numAffected) {  //eslint-disable-line
 		console.log(err)
-		console.log(numAffected)
+		return numAffected
 	}
 }
 
