@@ -4,9 +4,14 @@ const request = require('request')
 const passwordHash = require('password-hash')
 
 describe('DataBase Suite of tests', function(){
-	it('Can Add a user to the database', function(done) {
+	beforeEach(function() {
 		const hashedPassword = passwordHash.generate('testpassword')
-		const returnData = database.adduser('test user','test@user.com',hashedPassword,[12122,2,2,3])
+
+		database.adduser('test user','test@user.com',hashedPassword,[12122,2,2,3])
+	})
+	it('Can Add a user to the database', function(done) {
+		const hashedPassword = passwordHash.generate('testpasswordwwe')
+		const returnData = database.adduser('test user','Added User',hashedPassword,[12122,2,2,3])
 
 		expect(returnData.name).toBe('test user')
 		done()
@@ -37,10 +42,14 @@ describe('DataBase Suite of tests', function(){
 			}
 		}
 
-		database.adduser('test user 2','test2@user.com',hashedPassword2,[12122,2,2,3])
-		database.validateuser('test2@user.com')
+		const newUser = new database.User({name: 'Test User 2', email: 'test2@user.com', passwordHash: hashedPassword2, validation: 'true', validationCode: 'null', favorites: []})
+
+		newUser.save(function(err){
+			if(err) {
+				console.log(err)
+			}
+		})
 		request.del(options,function(error, response){
-			console.log(response)
 			expect(response.statusCode).toBe(200)
 			done()
 		})
