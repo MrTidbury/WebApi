@@ -36,7 +36,7 @@ exports.recipeSearch = function recipeSearch(req, res) {
 					id: results[i].id,
 					title: results[i].title,
 					readyInMinutes: results[i].readyInMinutes,
-					FindMore: 'api.tidbury,xyz/recipe/'+results[i].id
+					FindMore: 'api.tidbury.xyz/recipe/'+results[i].id
 				}
 
 				recipes.push(recipe)

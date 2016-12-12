@@ -120,7 +120,7 @@
 			}		else{
 				if (userFound.validationCode === validationCode) {
 					database.validateuser(email)
-					res.send(SuccsessCode, 'Congratulations '+userFound.name+ 'your account is now validated')
+					res.send(SuccsessCode, 'Congratulations '+userFound.name+ ' your account is now validated')
 				}			else{
 					res.send(AuthErrCode,'incorrect code')
 				}

@@ -84,7 +84,7 @@ exports.removeuser = function removeuser(req, res){
 		if(err){
 			res.send(errCode,err)
 		}		else{
-			res.send(succsessCode,'User '+email+'Succsessfully Removed')
+			res.send(succsessCode,'User '+email+' Succsessfully Removed')
 		}
 	})
 }
@@ -145,7 +145,7 @@ exports.removeFavourite = function addFavourite(req, res){
 		if(err){
 			res.send(errCode,err)
 		}		else
-			res.send(succsessCode, 'Recipie removed to favorites')
+			res.send(succsessCode, 'Recipie removed from favorites')
 	}
 )
 }
