@@ -36,7 +36,7 @@ exports.recipeSearch = function recipeSearch(req, res) {
 					id: results[i].id,
 					title: results[i].title,
 					readyInMinutes: results[i].readyInMinutes,
-					FindMore: 'http://localhost:8080/recipe/'+results[i].id
+					FindMore: 'api.tidbury,xyz/recipe/'+results[i].id
 				}
 
 				recipes.push(recipe)
@@ -105,5 +105,5 @@ exports.detailedRecipe = function detailedRecipe(req,res){
 * @returns {null} 200 response Code */
 exports.test = function test(req, res) {
 	console.log('Test Function Called')
-	res.send(SuccessCode, 'Api is online')
+	res.send(SuccessCode, 'Welcome to Jack Tiburys Recipe Api for documentation please visit http://docs.api.tidbury.xyz alternitivly the repository can be found at https://gitlab.com/MrTidbury/WebApi')
 }
