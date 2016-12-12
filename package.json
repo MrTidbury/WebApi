@@ -4,7 +4,8 @@
   "description": "Basic Web Api with multuple endpoints",
   "main": "nodejs index.js",
   "scripts": {
-    "test": "nodejs jasmine.js "
+    "test": "nodejs jasmine.js ",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
