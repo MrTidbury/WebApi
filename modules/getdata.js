@@ -105,5 +105,5 @@ exports.detailedRecipe = function detailedRecipe(req,res){
 * @returns {null} 200 response Code */
 exports.test = function test(req, res) {
 	console.log('Test Function Called')
-	res.send(SuccessCode, 'Welcome to Jack Tiburys Recipe Api for documentation please visit http://docs.api.tidbury.xyz alternitivly the repository can be found at https://gitlab.com/MrTidbury/WebApi')
+	res.send(SuccessCode, 'Welcome to Jack Tidburys Recipe Api for documentation please visit http://docs.api.tidbury.xyz alternitivly the repository can be found at https://gitlab.com/MrTidbury/WebApi')
 }
