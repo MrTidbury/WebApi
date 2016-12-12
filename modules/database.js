@@ -75,7 +75,7 @@ exports.validateuser = function validateuser(email){
 exports.removeuser = function removeuser(req, res){
 	const header=req.headers['authorization']||''
 	const token=header.split(/\s+/).pop()||''
-	 const auth=new Buffer(token, 'base64').toString()
+	const auth=new Buffer(token, 'base64').toString()
 	const parts=auth.split(/:/)
 	const email=parts[0]
 

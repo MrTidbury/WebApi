@@ -1,6 +1,5 @@
 node_modules/
 .git
-secrets.js
 coverage/
 out/
 conf.json

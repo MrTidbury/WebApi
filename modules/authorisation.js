@@ -44,6 +44,9 @@ exports.registerUser = function registerUser(req, res){
 			 html: '<a href="'+validationUrl+'">Please Click Here to validate your account</a>'
 	 }
 
+	if (req.headers.name === '' || req.headers.name === undefined || req.headers.name === null){
+		res.send(ErrCode,'Name Header cannot be empty')
+	}
 	console.log(validationCode)
 	database.findUser(email, function(error, userFound){
 		if(userFound === null){

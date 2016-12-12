@@ -5,3 +5,4 @@ node_modules/
 readme.md
 secrets.js
 modules/testdb.js
+spec/

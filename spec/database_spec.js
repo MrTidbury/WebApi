@@ -4,11 +4,10 @@ const request = require('request')
 const passwordHash = require('password-hash')
 
 describe('DataBase Suite of tests', function(){
-	beforeEach(function() {
-		const hashedPassword = passwordHash.generate('testpassword')
 
-		database.adduser('test user','test@user.com',hashedPassword,[12122,2,2,3])
-	})
+	const hashedPassword = passwordHash.generate('testpassword')
+
+	database.adduser('test user','test@user.com',hashedPassword,[12122,2,2,3])
 	it('Can Add a user to the database', function(done) {
 		const hashedPassword = passwordHash.generate('testpasswordwwe')
 		const returnData = database.adduser('test user','Added User',hashedPassword,[12122,2,2,3])
