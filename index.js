@@ -34,6 +34,7 @@ const port = process.env.PORT || internal_port
 
 server.listen(port, err => console.log(err || `App running on port ${port}`))
 /** closeServer
+@return {null} nothing, just closes the server
 *Closes the NodeJS Server, used in testing
 */
 exports.closeServer = function(){

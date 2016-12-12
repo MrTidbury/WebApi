@@ -19,7 +19,7 @@ describe('Get /', function() {
 	})
 	it('returns Api is Online', function(done) {
 		request.get(base_url, function(error, response, body){
-			expect(body).toBe('"Welcome to Jack Tiburys Recipe Api for documentation please visit http://docs.api.tidbury.xyz alternitivly the repository can be found at https://gitlab.com/MrTidbury/WebApi"')
+			expect(body).toBe('"Welcome to Jack Tidburys Recipe Api for documentation please visit http://docs.api.tidbury.xyz alternitivly the repository can be found at https://gitlab.com/MrTidbury/WebApi"')
 			done()
 		})
 	})

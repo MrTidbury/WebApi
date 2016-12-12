@@ -60,7 +60,7 @@ exports.favorites = function favorites(req, res){
 
 			for(let i = 0; i < favoritesId.length; i++){
 				const url = {
-					url: 'http://localhost:8080/recipe/'+favoritesId[i]
+					url: 'http://api.tidbury.xyz/recipe/'+favoritesId[i]
 				}
 
 				requests.push(url)

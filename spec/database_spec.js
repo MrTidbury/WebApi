@@ -17,7 +17,7 @@ describe('DataBase Suite of tests', function(){
 	})
 	it('Can Find the Correct User in the database',function(done){
 		database.findUser('test@user.com', function(error, userFound){
-			console.log(userFound)
+			//console.log(userFound)
 			expect(userFound.email).toBe('test@user.com')
 		})
 		done()
@@ -49,9 +49,9 @@ describe('DataBase Suite of tests', function(){
 			}
 		})
 		request.del(options,function(error, response){
-			expect(response.statusCode).toBe(200)
+			var expected_responce = '"User test2@user.comSuccsessfully Removed"'
+			expect(response.body).toBe(expected_responce)
 			done()
 		})
 	})
-
 })
