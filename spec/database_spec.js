@@ -49,7 +49,7 @@ describe('DataBase Suite of tests', function(){
 			}
 		})
 		request.del(options,function(error, response){
-			var expected_responce = '"User test2@user.comSuccsessfully Removed"'
+			var expected_responce = '"User test2@user.com Succsessfully Removed"'
 			expect(response.body).toBe(expected_responce)
 			done()
 		})
