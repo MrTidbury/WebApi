@@ -14,12 +14,13 @@
 	const emailpsw = require('../secrets').emailpsw
 
 	const smtpTransport = mailer.createTransport('SMTP',{
-		service: 'Gmail',
+		host: 'mail.tidbury.xyz',
+		port: 26,
+		secure: false, // use SSL
 		auth: {
-			user: emailaddr,
-			pass: emailpsw
-		}
-	})
+			user: 'api@tidbury.xyz',
+			pass: 'apiemail1234'
+		}})
 
 /** This Function the addition of a user to the database, it calls the database.addUser function to handle the datbase transaction. It takes all of the information required from the authorization header, and also the name header that are passed in the request. It the Hashes the password and generates a Validation Code. It also sends an email with the validation link to the users email address
 * @alias module:authorisation.registerUser
