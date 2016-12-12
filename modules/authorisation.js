@@ -18,8 +18,8 @@
 		port: 26,
 		secure: false, // use SSL
 		auth: {
-			user: 'api@tidbury.xyz',
-			pass: 'apiemail1234'
+			user: emailaddr,
+			pass: emailpsw
 		}})
 
 /** This Function the addition of a user to the database, it calls the database.addUser function to handle the datbase transaction. It takes all of the information required from the authorization header, and also the name header that are passed in the request. It the Hashes the password and generates a Validation Code. It also sends an email with the validation link to the users email address
