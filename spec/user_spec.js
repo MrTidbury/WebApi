@@ -58,27 +58,4 @@ describe('Users Suite of Tests', function(){
 			done()
 		})
   })
-  it('Can return favorites of user',function(done){
-    const options2 = {
-      url: 'http://api.tidbury.xyz/favorites',
-      headers: {
-        'Authorization': auth
-      }
-    }
-    const options = {
-      url: 'http://api.tidbury.xyz/favorites/630746',
-      headers: {
-        'Authorization': auth
-      }
-    }
-    request.put(options,function(error, response){
-      request.get(options2,function(error, response){
-        var expected_responce = '"Cauliflower Crust Hawaiian Pizza"'
-        console.log(response)
-        expect(response.body).toContain(expected_responce)
-        done()
-      })
-		})
-
-  })
 })
